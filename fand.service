@@ -1,0 +1,10 @@
+[Unit]
+Description=Raspberry Pi Temperature Monitoring Daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/fand
+ExecStop=/usr/bin/killall fand
+
+[Install]
+WantedBy=multi-user.target
