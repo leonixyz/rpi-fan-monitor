@@ -15,7 +15,7 @@
 #define GPIO_SWITCH 	15	// GPIO pin activating the fan (using wiringPi's numeration)
 #define BLOW_DURATION 	33	// duration of the fan blow (seconds)
 #define SLEEP_DURATION 	66	// duration of the iteration (seconds)
-#define MAX_TEMPERATURE 50	// max temperature allowed (° Celsius)
+#define MAX_TEMPERATURE 55	// max temperature allowed (° Celsius)
 
 
 /* Dont't touch below here */
@@ -46,23 +46,23 @@ int main(int argc, char* argv[])
     case 1:
       break;
     case 2:
-      blow = atoi(argv[2]) * 1000 * 1000;
+      blow = atoi(argv[1]) * 1000 * 1000;
       sleep = blow * 2;
       break;
     case 3:
-      blow = atoi(argv[2]) * 1000 * 1000;
-      sleep = atoi(argv[3]) * 1000 * 1000;
+      blow = atoi(argv[1]) * 1000 * 1000;
+      sleep = atoi(argv[2]) * 1000 * 1000;
       break;
     case 4:
-      blow = atoi(argv[2]) * 1000 * 1000;
-      sleep = atoi(argv[3]) * 1000 * 1000;
-      maxTemp = atoi(argv[4]);
+      blow = atoi(argv[1]) * 1000 * 1000;
+      sleep = atoi(argv[2]) * 1000 * 1000;
+      maxTemp = atoi(argv[3]);
       break;
     case 5:
-      blow = atoi(argv[2]) * 1000 * 1000;
-      sleep = atoi(argv[3]) * 1000 * 1000;
-      maxTemp = atoi(argv[4]);
-      gpio_switch = atoi(argv[5]);
+      blow = atoi(argv[1]) * 1000 * 1000;
+      sleep = atoi(argv[2]) * 1000 * 1000;
+      maxTemp = atoi(argv[3]);
+      gpio_switch = atoi(argv[4]);
       break;
     default:
       exit(3);
@@ -72,9 +72,9 @@ int main(int argc, char* argv[])
   // reset default values in case of error
   if(blow == 0 || sleep == 0 || maxTemp == 0)
   {
-    blow = 33 * 1000 * 1000;
-    sleep = 66 * 1000 * 1000;
-    maxTemp = 50;
+    blow = BLOW_DURATION * 1000 * 1000;
+    sleep = SLEEP_DURATION * 1000 * 1000;
+    maxTemp = MAX_TEMPERATURE;
   }
 
   // set the gpio pin to no-signal
