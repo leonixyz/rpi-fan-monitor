@@ -15,7 +15,7 @@
 #define GPIO_SWITCH 	15	// GPIO pin activating the fan (using wiringPi's numeration)
 #define BLOW_DURATION 	33	// duration of the fan blow (seconds)
 #define SLEEP_DURATION 	66	// duration of the iteration (seconds)
-#define MAX_TEMPERATURE 55	// max temperature allowed (° Celsius)
+#define MAX_TEMPERATURE 55	// max temperature allowed (Â° Celsius)
 
 
 /* Dont't touch below here */
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
       gpio_switch = GPIO_SWITCH, 
       blow = BLOW_DURATION * 1000 * 1000, 
       sleep = SLEEP_DURATION * 1000 * 1000,
-      maxTemp = MAX_TEMPERATURE;
+      maxTemp = MAX_TEMPERATURE * 55;
 
   FILE* file; // to read temperature from /sys/class/thermal/thermal_zone0/temp
  
@@ -56,12 +56,12 @@ int main(int argc, char* argv[])
     case 4:
       blow = atoi(argv[1]) * 1000 * 1000;
       sleep = atoi(argv[2]) * 1000 * 1000;
-      maxTemp = atoi(argv[3]);
+      maxTemp = atoi(argv[3]) * 1000;
       break;
     case 5:
       blow = atoi(argv[1]) * 1000 * 1000;
       sleep = atoi(argv[2]) * 1000 * 1000;
-      maxTemp = atoi(argv[3]);
+      maxTemp = atoi(argv[3]) * 1000;
       gpio_switch = atoi(argv[4]);
       break;
     default:
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
   {
     blow = BLOW_DURATION * 1000 * 1000;
     sleep = SLEEP_DURATION * 1000 * 1000;
-    maxTemp = MAX_TEMPERATURE;
+    maxTemp = MAX_TEMPERATURE * 1000;
   }
 
   // set the gpio pin to no-signal
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
     
     fclose(file);
 
-    if(temperature > 50000)
+    if(temperature > maxTemp)
     {
       // activate the fan in case of high temperature
       digitalWrite(gpio_switch, 1);
