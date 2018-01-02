@@ -8,7 +8,7 @@ uninstall:
 	make uninstall;						\
 	sudo rm /usr/sbin/fand;					\
 	sudo rm /usr/lib/systemd/system/fand.service;		\
-	suro rmm /etc/systemd/system/multi-user.target.wants/fand.service
+	sudo rm /etc/systemd/system/multi-user.target.wants/fand.service
 
 clean:
 	rm -fr wiringPi;					\
