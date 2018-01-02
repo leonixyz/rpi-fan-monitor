@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
     
     fclose(file);
 
-    if(temperature > maxTemp)
+    if(temperature > maxTemp * 1000)
     {
       // activate the fan in case of high temperature
       digitalWrite(gpio_switch, 1);
