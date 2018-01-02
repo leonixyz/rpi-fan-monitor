@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
       gpio_switch = GPIO_SWITCH, 
       blow = BLOW_DURATION * 1000 * 1000, 
       sleep = SLEEP_DURATION * 1000 * 1000,
-      maxTemp = MAX_TEMPERATURE * 55;
+      maxTemp = MAX_TEMPERATURE;
 
   FILE* file; // to read temperature from /sys/class/thermal/thermal_zone0/temp
  
